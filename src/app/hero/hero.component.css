@@ -1,0 +1,25 @@
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  .content .highlight {
+    color: #ff9800;
+    font-weight: bold;
+  }
+  
+  .content p {
+    margin: 20px 0;
+    font-size: 1.1rem;
+  }
+  
+  .actions button {
+    margin-right: 10px;
+  }
+  

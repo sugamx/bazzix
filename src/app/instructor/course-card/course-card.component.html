@@ -1,0 +1,38 @@
+<div class="course-card">
+    <div class="card-header">
+      <h3>{{ course.title }}</h3>
+      <div class="card-actions">
+        <!-- In course-card.component.html -->
+            <app-course-status [status]="course.status || 'DRAFT'"></app-course-status>
+            <!-- <p>Hello</p> -->
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <!-- <button mat-menu-item (click)="editCourse()">
+            <mat-icon>edit</mat-icon> Edit
+          </button> -->
+          <a routerLink="/about"> Content</a>
+          <button mat-menu-item (click)="updateStatus('PUBLISHED')" 
+                  *ngIf="course.status === 'DRAFT'">
+            <mat-icon>publish</mat-icon> Publish
+          </button>
+          <button mat-menu-item (click)="updateStatus('DRAFT')"
+                  *ngIf="course.status === 'PUBLISHED'">
+            <mat-icon>drafts</mat-icon> Unpublish
+          </button>
+          <button mat-menu-item (click)="confirmDelete()" color="warn">
+            <mat-icon>delete</mat-icon> Cancel
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <img [src]="course.image" alt="Course thumbnail">
+    <div class="card-footer">
+      <span class="price">{{ course.price | currency }}</span>
+      <!-- <button mat-button (click)="editCourse()"> -->
+        <!-- <mat-icon>edit</mat-icon>  -->
+        <a routerLink="/about"> Content</a>
+      <!-- </button> -->
+    </div>
+  </div>

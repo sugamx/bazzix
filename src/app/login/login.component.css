@@ -1,0 +1,216 @@
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.testimonials, .login-card {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.testimonials h2, .card-header h2 {
+  margin-bottom: 10px;
+}
+
+.testimonials p, .card-header p {
+  margin-bottom: 20px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.testimonial-author img {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 50px;
+}
+
+.testimonial-author a {
+  margin-left: auto;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.login-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 0 20px;
+}
+
+.card-body form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group input[type="checkbox"] {
+  margin-right: 5px;
+  width: auto;
+}
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Make space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  font-size: 16px;
+}
+
+.toggle-password:hover {
+  color: #333;
+}
+
+.toggle-password:focus {
+  outline: none;
+}
+
+.login-button {
+  padding: 10px;
+  background-color: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.or-divider {
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.or-divider span {
+  background-color: #fff;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.or-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ccc;
+  z-index: 0;
+}
+
+/* GLOBAL STYLES (styles.scss or styles.css) */
+
+.error-snackbar {
+  background: #f44336 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  min-width: 250px !important;
+  padding: 16px 24px !important;
+}
+
+.error-snackbar .mat-simple-snackbar-action {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.error-snackbar .mat-simple-snackbar-action:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.success-snackbar {
+  background: #4caf50 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  min-width: 250px !important;
+  padding: 16px 24px !important;
+}
+
+.success-snackbar .mat-simple-snackbar-action {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.success-snackbar .mat-simple-snackbar-action:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Common snackbar text styling */
+.mat-simple-snackbar {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.25px !important;
+}
+
+/* Animation */
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  animation: slideUp 0.3s ease-out !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

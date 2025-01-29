@@ -1,0 +1,63 @@
+<div class="login-container">
+  <div class="testimonials">
+    <h2>Students Testimonials</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur. Tempus tincidunt etiam eget elit id imperdiet et. Cras eu sit dignissim
+      lobortis nibh et. Ac cum eget habitasse in velit fringilla feugiat senectus in.
+    </p>
+    <p>
+      The web design course provided a solid foundation for me. The instructors were knowledgeable and supportive, and
+      the
+      interactive learning environment was engaging. I highly recommend it!
+    </p>
+    <div class="testimonial-author">
+      <img src="./sara.jpg" alt="Author Image">
+      <span>Sarah L</span>
+      <a href="#">Read Full Story</a>
+    </div>
+    <div class="navigation">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+  </div>
+
+  <div class="login-card">
+    <div class="card-header">
+      <h2>Login</h2>
+      <p>Welcome back! Please log in to access your account.</p>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your Email">
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message">
+            <div *ngIf="email?.errors?.['required']">Email is required.</div>
+            <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-container">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="Enter your Password">
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+              <i class="fa" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+            </button>
+          </div>
+          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-message">
+            <div *ngIf="password?.errors?.['required']">Password is required.</div>
+            <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="rememberMe" formControlName="rememberMe">
+          <label for="rememberMe">Remember Me</label>
+          <!-- Replace the existing forgot password link -->
+          <a routerLink="/forgot-password" class="forgot-password">Forgot Password?</a>
+        </div>
+        <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
+      </form>
+    </div>
+    <!-- Add social login buttons here if needed -->
+  </div>
+</div>

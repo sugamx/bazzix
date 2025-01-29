@@ -1,0 +1,96 @@
+.courses-container {
+    padding: 2rem;
+  }
+  
+  .search-bar {
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+  }
+  
+  .search-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    z-index: 1;
+  }
+  
+  .form-control {
+    padding-left: 35px; /* Make room for the icon */
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    height: 40px;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+    outline: none;
+  }
+  
+  .form-control::placeholder {
+    color: #999;
+  }
+  
+  /* Optional: Add hover effect */
+  .search-input-wrapper:hover .form-control {
+    border-color: #bbb;
+  }
+  
+  /* Optional: Change icon color when input is focused */
+  .form-control:focus + .search-icon,
+  .search-input-wrapper:hover .search-icon {
+    color: #4a90e2;
+  }
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .courses-container {
+      padding: 1rem;
+    }
+  
+    .card-img-top {
+      height: 150px;
+    }
+  }

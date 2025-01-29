@@ -1,0 +1,27 @@
+<div class="featured-courses-container container py-5">
+  <h2 class="section-title mb-5">Featured Courses</h2>
+  <div class="row g-4">
+    <div class="col-xl-3 col-lg-4 col-md-6 mb-4" *ngFor="let course of featuredCourses">
+      <div class="card h-100 course-card shadow-hover" [routerLink]="['/course', course.id]">
+        <img [src]="course.image" class="card-img-top course-image" alt="Course Image">
+        <div class="card-body p-4">
+          <h5 class="card-title fw-bold mb-3">{{ course.title }}</h5>
+          <p class="card-text text-secondary mb-4">{{ course.description }}</p>
+          <div class="course-meta">
+            <p class="mb-2 text-muted small">
+              <i class="fas fa-chalkboard-teacher me-2"></i>{{ course.instructor }}
+            </p>
+            <p class="mb-0 text-success fw-bold">
+              {{ course.price | currency }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-5">
+    <button class="btn btn-primary btn-lg px-5 py-2" routerLink="/coursesMain">
+      View All Courses <i class="fas fa-arrow-right ms-2"></i>
+    </button>
+  </div>
+</div>

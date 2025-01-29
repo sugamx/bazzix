@@ -1,0 +1,37 @@
+<div class="courses-container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <div class="search-input-wrapper">
+        <span class="material-icons search-icon">search</span>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchText"
+          (input)="onSearchInput()"
+          placeholder="Search by title, description, or instructor"
+        />
+        
+      </div>
+    </div>
+  
+    <!-- Courses Grid -->
+    <div class="row">
+        <div class="col-md-3 mb-4" *ngFor="let course of filteredCourses">
+          <div class="card h-100" [routerLink]="['/course', course.id]">
+            <img [src]="course.image" alt="Course Image" />
+            <div class="card-body">
+              <h5 class="card-title" [innerHTML]="highlightText(course.title, searchText)"></h5>
+              <p class="card-text" [innerHTML]="highlightText(course.description, searchText)"></p>
+              <p class="card-text"><strong>Instructor:</strong> <span [innerHTML]=" highlightText(course.instructor, searchText)"></span></p>
+              <p class="card-text"><strong>Price:</strong> {{ course.price | currency }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+    <!-- No Courses Found Message -->
+    <div *ngIf="filteredCourses.length === 0" class="text-center mt-5">
+      <p>No courses found.</p>
+    </div>
+  </div>

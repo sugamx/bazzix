@@ -1,0 +1,72 @@
+<div class="sign-up-container">
+  <div class="testimonials">
+    <h2>Students Testimonials</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur. Tempus tincidunt etiam eget elit id imperdiet et. Cras eu sit dignissim
+      lobortis nibh et. Ac cum eget habitasse in velit fringilla feugiat senectus in.
+    </p>
+    <p>
+      The web design course provided a solid foundation for me. The instructors were knowledgeable and supportive, and the
+      interactive learning environment was engaging. I highly recommend it!
+    </p>
+    <div class="testimonial-author">
+      <img src="/sara.jpg" alt="Author Image">
+      <span>Sarah L</span>
+      <a href="#">Read Full Story</a>
+    </div>
+    <div class="navigation">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+  </div>
+
+  <div class="sign-up-card">
+    <div class="card-header">
+      <h2>Sign Up</h2>
+      <p>Create an account to unlock exclusive features.</p>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" formControlName="fullName" placeholder="Enter your Name">
+          <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)" class="error-message">
+            <div *ngIf="fullName?.errors?.['required']">Full Name is required.</div>
+            <div *ngIf="fullName?.errors?.['minlength']">Full Name must be at least 3 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your Email">
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message">
+            <div *ngIf="email?.errors?.['required']">Email is required.</div>
+            <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-container">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="Enter your Password">
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+              <i class="fa" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+            </button>
+          </div>
+          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-message">
+            <div *ngIf="password?.errors?.['required']">Password is required.</div>
+            <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="terms" formControlName="terms">
+          <label for="terms">I agree with Terms of Use and Privacy Policy</label>
+          <div *ngIf="terms?.invalid && (terms?.dirty || terms?.touched)" class="error-message">
+            <div *ngIf="terms?.errors?.['requiredTrue']">You must agree to the terms.</div>
+          </div>
+        </div>
+        <button type="submit" class="sign-up-button" [disabled]="signUpForm.invalid">Sign Up</button>
+      </form>
+    </div>
+
+    <!-- Add social login buttons here if needed -->
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="contact-container">
+  <h2>Contact Us</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <!-- Name Field -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter your name">
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error-message">
+        <div *ngIf="name?.errors?.['required']">Name is required.</div>
+        <div *ngIf="name?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message">
+        <div *ngIf="email?.errors?.['required']">Email is required.</div>
+        <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
+      </div>
+    </div>
+
+    <!-- Message Field -->
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" formControlName="message" placeholder="Enter your message"></textarea>
+      <div *ngIf="message?.invalid && (message?.dirty || message?.touched)" class="error-message">
+        <div *ngIf="message?.errors?.['required']">Message is required.</div>
+        <div *ngIf="message?.errors?.['minlength']">Message must be at least 10 characters long.</div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button" [disabled]="contactForm.invalid">Submit</button>
+  </form>
+</div>

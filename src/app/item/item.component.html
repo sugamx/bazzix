@@ -1,0 +1,24 @@
+<!-- Registration Form -->
+<form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required [(ngModel)]="registrationData.name" name="name">
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required [(ngModel)]="registrationData.email" name="email">
+    
+    <button type="submit">Register</button>
+  </form>
+  
+  <!-- Display Fetched Data -->
+  <div *ngIf="items.length > 0">
+    <h2>Registered Users</h2>
+    <ul>
+      <li *ngFor="let item of items">
+        {{ item.name }} - {{ item.email }}
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="items.length === 0">
+    <p>No registered users found.</p>
+  </div>

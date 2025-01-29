@@ -1,0 +1,30 @@
+<!-- List of Items -->
+<div *ngIf="items.length > 0">
+    <h2>Manage Registered Users</h2>
+    <ul>
+      <li *ngFor="let item of items">
+        {{ item.name }} - {{ item.email }}
+        <button (click)="onEdit(item)">Edit</button>
+        <button (click)="onDelete(item.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="items.length === 0">
+    <p>No registered users found.</p>
+  </div>
+  
+  <!-- Edit Form -->
+  <div *ngIf="selectedItem">
+    <h2>Edit User</h2>
+    <form (ngSubmit)="onUpdate()">
+      <label for="edit-name">Name:</label>
+      <input type="text" id="edit-name" required [(ngModel)]="selectedItem.name" name="name">
+      
+      <label for="edit-email">Email:</label>
+      <input type="email" id="edit-email" required [(ngModel)]="selectedItem.email" name="email">
+      
+      <button type="submit">Update</button>
+      <button type="button" (click)="selectedItem = null">Cancel</button>
+    </form>
+  </div>

@@ -1,0 +1,115 @@
+<div *ngIf="course" class="course-details-container">
+    <!-- Course Header Section -->
+    <div class="course-header">
+        <div class="image-container">
+            <img [src]="course.image" alt="Course Image" class="course-image" />
+            <div class="promotion-badge" *ngIf="course.promotion_badge">
+                {{ course.promotion_badge }}
+            </div>
+        </div>
+        
+        <div class="course-info">
+            <!-- Title and Basic Info -->
+            <div class="title-section">
+                <h1>{{ course.title }}</h1>
+                <div class="rating-enrollment">
+                    <span class="rating">
+                        ⭐ {{ course.rating }} ({{ course.total_reviews | number }} reviews)
+                    </span>
+                    <span class="enrollment">
+                        🧑🎓 {{ course.total_enrolled | number }} students
+                    </span>
+                </div>
+            </div>
+
+            <!-- Key Course Metadata -->
+            <div class="course-meta-grid">
+                <div class="meta-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>{{ course.instructor }}</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>{{ course.duration_hours }} total hours</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-signal"></i>
+                    <span>{{ course.level }} Level</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-tags"></i>
+                    <span>{{ course.category }}</span>
+                </div>
+            </div>
+
+            <!-- Pricing and Enrollment -->
+            <div class="pricing-section">
+                <div class="price-box">
+                    <h2 class="current-price">{{ course.price | currency }}</h2>
+                    <div class="discount" *ngIf="course.discount">
+                        <span class="original-price">{{ course.original_price | currency }}</span>
+                        <span class="discount-percent">{{ course.discount }}% OFF</span>
+                    </div>
+                </div>
+                
+                <div class="enrollment-status">
+                    <button class="enroll-toggle-btn" 
+                            [class.enrolled]="enrolled"
+                            (click)="enrolled ? unenrollCourse() : enrollCourse()">
+                        <i class="fas" [class.fa-trash-alt]="enrolled" [class.fa-cart-plus]="!enrolled"></i>
+                        {{ enrolled ? 'Remove Course' : 'Enroll Now' }}
+                    </button>
+                    <p class="money-back">30-Day Money-Back Guarantee</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Content Details -->
+    <div class="course-content">
+        <!-- What You'll Learn -->
+        <div class="learning-section">
+            <h3>What You'll Learn</h3>
+            <ul class="learning-objectives">
+                <li *ngFor="let objective of course.objectives">
+                    <i class="fas fa-check-circle"></i>{{ objective }}
+                </li>
+            </ul>
+        </div>
+
+        <!-- Course Curriculum -->
+        <div class="curriculum-section">
+            <h3>Course Content</h3>
+            <div class="curriculum-stats">
+                <span>{{ course.lectures }} lectures • {{ course.duration_hours }} hours</span>
+                <span class="last-updated">Updated {{ course.last_updated }}</span>
+            </div>
+        </div>
+
+        <!-- Requirements -->
+        <div class="requirements-section" >
+            <h3>Requirements</h3>
+            <ul>
+                <li *ngFor="let req of course.prerequisites">
+                    <i class="fas fa-book"></i>{{ req }}
+                </li>
+                <li *ngIf="course.prerequisites?.length === 0">No prerequisites required</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Instructor Section -->
+    <div class="instructor-section">
+        <h3>About the Instructor</h3>
+        <div class="instructor-profile">
+            <div class="instructor-info">
+                <h4>{{ course.instructor }}</h4>
+                <div class="instructor-stats">
+                    <span>⭐ {{ course.instructor_rating || '4.9' }} Instructor Rating</span>
+                    <span>🧑🎓 {{ course.instructor_students || '50,000' }} Students</span>
+                    <span>📚 {{ course.instructor_courses || '15' }} Courses</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

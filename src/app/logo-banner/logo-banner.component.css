@@ -1,0 +1,63 @@
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  .partners-heading {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #2d3436;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+  
+  .logo-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+  
+  .logo-track {
+    display: inline-flex;
+    animation: slide-horizontal 20s linear infinite;
+  }
+  
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo {
+    width: 140px;
+    height: 60px;
+    margin: 15px;
+    padding: 5px;
+    object-fit: contain;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .logo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  @keyframes slide-horizontal {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .logo-container:hover .logo-track {
+    animation-play-state: paused;
+  }
+  
+  

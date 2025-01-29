@@ -1,0 +1,39 @@
+/* src/app/admin/admin.component.css */
+.admin-dashboard {
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px; /* Add margin to avoid overlap with fixed navbar */
+  }
+  
+  .admin-dashboard h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .admin-dashboard p {
+    font-size: 1.2em;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .user-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .user-table tr:hover {
+    background-color: #ddd;
+  }

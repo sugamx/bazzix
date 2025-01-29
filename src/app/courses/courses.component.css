@@ -1,0 +1,113 @@
+.featured-courses-container {
+  
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+  margin: 0 auto; /* Center the container */
+  box-sizing: border-box; 
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2e2d2d;
+  position: relative;
+  padding-left: 35%;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #0d6efd;
+}
+
+.course-card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.course-image {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #2d2d2d;
+  min-height: 3.5rem;
+}
+
+.text-secondary {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  min-height: 4.5rem;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  padding: 0.75rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+}
+
+.shadow-hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+.course-meta {
+  display: flex;
+  justify-content: space-between; /* Ensure instructor and price align horizontally */
+  align-items: center; /* Align items vertically in the center */
+  font-size: 0.9rem; /* Adjust font size for better appearance */
+}
+
+.course-meta p {
+  margin: 0; /* Remove default margins */
+  padding: 0;
+}
+
+.course-meta .text-muted {
+  color: #6c757d; /* Slightly lighter color for instructor name */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Add space between icon and text */
+}
+
+.course-meta .text-success {
+  font-weight: bold; /* Make price stand out */
+  color: #198754; /* Bootstrap success green color */
+}
+
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .course-image {
+    height: 180px;
+  }
+}

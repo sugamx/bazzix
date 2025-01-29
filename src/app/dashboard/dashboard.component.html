@@ -1,0 +1,24 @@
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+    <div class="user-info">
+      <h2>Welcome, {{ user?.fullName || user?.name }}</h2>
+      <p>Email: {{ user?.email }}</p>
+    </div>
+  
+    <div class="enrolled-courses">
+      <h3>Your Enrolled Courses</h3>
+      <div *ngIf="enrolledCourses.length === 0" class="no-courses">
+        You haven't enrolled in any courses yet.
+      </div>
+      <div class="course-list">
+        <div *ngFor="let course of enrolledCourses" class="course-card">
+          <img [src]="course.image" alt="Course image" class="course-thumbnail">
+          <div class="course-info">
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.description }}</p>
+            <p class="price">{{ course.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

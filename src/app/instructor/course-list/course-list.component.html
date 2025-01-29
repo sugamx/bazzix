@@ -1,0 +1,71 @@
+<div class="instructor-dashboard">
+    <!-- Header Section -->
+    <div class="header">
+        <h2>Your Courses</h2>
+        <div class="controls">
+            <input class="search-input" type="text" placeholder="Search your courses" (input)="onSearch($event)">
+            <button class="new-course-btn" routerLink="/instructor/create">
+                <span>+</span> New Course
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-overlay" *ngIf="isLoading">
+        <div class="spinner"></div>
+        <p>Loading courses...</p>
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="course-grid">
+        <!-- Course Cards -->
+        <div *ngFor="let course of filteredCourses" class="course-card-wrapper">
+            <div class="course-card">
+                <div class="course-image">
+                    <img [src]="course.image || './assets/default-course.jpg'" alt="Course thumbnail">
+                    <!-- course-list.component.html -->
+
+                    <div class="course-status" [class.published]="course.status === 'PUBLISHED'"
+                        [class.draft]="course.status === 'DRAFT'">
+                        {{ course.status || 'DRAFT' | titlecase }}
+                    </div>
+
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">{{ course.title }}</h3>
+                    <p class="course-description">{{ course.description | slice:0:100 }}{{ course.description.length >
+                        100 ? '...' : '' }}</p>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            {{ course.total_enrolled || 0 }} enrolled
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-star"></i>
+                            {{ course.rating || '0.0' }} ({{ course.total_reviews || 0 }} reviews)
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="btn-edit" [routerLink]="['/instructor/courses/edit', course.id]">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn-delete" (click)="confirmDelete(course.id)">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoading && filteredCourses.length === 0">
+            <img src="/assets/empty-courses.svg" alt="No courses" class="empty-illustration">
+            <h3>No courses found</h3>
+            <p *ngIf="searchQuery">No results for "{{ searchQuery }}"</p>
+            <p *ngIf="!searchQuery">Start by creating a new course</p>
+        </div>
+    </div>
+
+    <!-- Resources Section -->
+    <app-resources-section></app-resources-section>
+</div>

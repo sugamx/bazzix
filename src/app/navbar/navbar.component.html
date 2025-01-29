@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">Bazzix</a>
+  </div>
+  <div class="nav-links">
+    <ul *ngIf="!isAdminRoute()">
+      <li *ngIf="!isInstructorRoute()"><a routerLink="/home">Home</a></li>
+      <li *ngIf="!isInstructorRoute()"><a routerLink="/about">About</a></li>
+      <li *ngIf="!isInstructorRoute()"><a routerLink="/coursesMain">Courses</a></li>
+      <li *ngIf="!isInstructorRoute()"><a routerLink="/contact">Contact</a></li>
+      <li *ngIf="!isInstructorRoute()"><a routerLink="/instructor/courses">Instructor</a></li>
+      <li *ngIf="isInstructorRoute()"><a routerLink="/home">Student</a></li>
+
+      <!-- Login and Signup Buttons -->
+      <li *ngIf="!isAuthenticated"><a routerLink="/login">Login</a></li>
+      <li *ngIf="!isAuthenticated"><a routerLink="/signup">Signup</a></li>
+    </ul>
+    <div *ngIf="isAdminRoute()" class="admin-page-title">
+      <a>Admin Page</a>
+    </div>
+  </div>
+
+  <!-- User Icon -->
+  <div class="user-icon-container" *ngIf="isAuthenticated" (click)="toggleDropdown($event)">
+    <img src="./user1.jpg" alt="User Icon" class="user-icon" />
+    <div [class.show]="dropdownVisible" class="dropdown mt-3">
+      <a routerLink="/dashboard">Dashboard</a>
+      <a (click)="logout()">Logout</a>
+    </div>
+  </div>
+</nav>

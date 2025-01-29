@@ -1,0 +1,102 @@
+<div class="create-course-container">
+    <h1>{{ isEditMode ? 'Edit Course' : 'Create Course' }}</h1>
+
+    <div class="form-group">
+        <label>Instructor Name</label>
+        <input type="text" class="form-control" [value]="instructorName" readonly />
+      </div>
+      
+  
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Course Title</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          class="form-control"
+          placeholder="Enter course title"
+        />
+        <div *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched" class="error">
+          Title is required and must be at least 3 characters.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          rows="5"
+          placeholder="Enter course description"
+        ></textarea>
+        <div *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched" class="error">
+          Description is required and must be at least 10 characters.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input
+          id="price"
+          type="number"
+          formControlName="price"
+          class="form-control"
+          placeholder="Enter course price"
+        />
+        <div *ngIf="courseForm.get('price')?.invalid && courseForm.get('price')?.touched" class="error">
+          Price must be a positive number.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="image">Upload Image</label>
+        <input
+          id="image"
+          type="file"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
+        <div *ngIf="courseForm.get('image')?.value">
+          <img [src]="courseForm.get('image')?.value" alt="Course Image" width="200" />
+        </div>
+      </div>
+
+      <!-- Add below the image upload section -->
+
+<div class="form-group">
+    <label>Learning Objectives</label>
+    <div formArrayName="objectives">
+      <div *ngFor="let objective of objectives.controls; let i = index" class="array-item">
+        <input [formControlName]="i" class="form-control" placeholder="Enter an objective">
+        <button type="button" class="btn btn-remove" (click)="removeObjective(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-add" (click)="addObjective()">Add Objective</button>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>Prerequisites</label>
+    <div formArrayName="prerequisites">
+      <div *ngFor="let prereq of prerequisites.controls; let i = index" class="array-item">
+        <input [formControlName]="i" class="form-control" placeholder="Enter a prerequisite">
+        <button type="button" class="btn btn-remove" (click)="removePrerequisite(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-add" (click)="addPrerequisite()">Add Prerequisite</button>
+    </div>
+  </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="courseForm.invalid">
+          {{ isEditMode ? 'Update Course' : 'Create Course' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="router.navigate(['/instructor/courses'])">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  

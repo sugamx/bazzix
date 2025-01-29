@@ -1,0 +1,88 @@
+/* course-details.component.css */
+.enrollment-status {
+    margin-top: 20px;
+  }
+  
+  .enroll-message {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .enroll-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .enroll-btn:hover:not([disabled]) {
+    background-color: #45a049;
+  }
+  
+  .enroll-btn[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .enroll-btn.enrolled {
+    background-color: #2196F3;
+  }
+  
+  /* dashboard.component.css */
+  .dashboard-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .user-info {
+    background-color: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+  
+  .enrolled-courses h3 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .course-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .course-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .course-info {
+    padding: 1rem;
+  }
+  
+  .price {
+    color: #2196F3;
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+  
+  .no-courses {
+    color: #666;
+    font-style: italic;
+  }
