@@ -24,7 +24,8 @@
   <div class="user-icon-container" *ngIf="isAuthenticated" (click)="toggleDropdown($event)">
     <img src="./user1.jpg" alt="User Icon" class="user-icon" />
     <div [class.show]="dropdownVisible" class="dropdown mt-3">
-      <a routerLink="/dashboard">Dashboard</a>
+      <!-- Show dashboard only for non-admin users -->
+      <a *ngIf="!isAdmin()" routerLink="/dashboard">Dashboard</a>
       <a (click)="logout()">Logout</a>
     </div>
   </div>

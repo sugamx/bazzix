@@ -42,6 +42,11 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  isAdmin(): boolean {
+    const currentUser = this.currentUser;
+    return currentUser?.email === 'admin@example.com' || currentUser?.role === 'admin';
+  }
+
   isInstructorRoute(): boolean {
     return this.currentRoute.startsWith('/instructor');
   }

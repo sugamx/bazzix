@@ -11,18 +11,8 @@
       "password": "1qaz2wsx",
       "terms": true,
       "chosenCourses": [
-        "a811"
-      ]
-    },
-    {
-      "id": "57e7",
-      "fullName": "jack",
-      "email": "jack@gmail.com",
-      "password": "1qaz2wsx",
-      "terms": true,
-      "chosenCourses": [
-        "6",
-        "e26e"
+        "a811",
+        "6"
       ]
     },
     {
@@ -32,8 +22,7 @@
       "password": "1qaz2wsx",
       "terms": true,
       "chosenCourses": [
-        "6",
-        "e26e"
+        "6"
       ]
     }
   ],

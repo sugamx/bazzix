@@ -41,6 +41,11 @@ export class AdminComponent implements OnInit {
           stepSize: 1
         }
       }
+    },
+    plugins: {
+      legend: {
+        display: false  // This will hide the legend (pink slab with text)
+      }
     }
   };
   barChartLabels: string[] = [];
