@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 export class AuthService {
+  private contactUrl='http://localhost:3000/contact';
   private apiUrl = 'http://localhost:3000/users'; // API endpoint for users
   private adminApiUrl = 'http://localhost:3000/admin'; // API endpoint for admin
 
@@ -135,7 +136,19 @@ export class AuthService {
 
   // Submit contact form
   submitContactForm(formData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, formData);
+    return this.http.post<any>(this.contactUrl, formData);
+  }
+
+  getContactSubmissions(): Observable<any[]> {
+    return this.http.get<any[]>(this.contactUrl);
+  }
+
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+  deleteContactSubmission(id: string): Observable<any> {
+    return this.http.delete(`${this.contactUrl}/${id}`);
   }
 }
 

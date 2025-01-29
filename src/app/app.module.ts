@@ -37,6 +37,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +66,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CourseCardComponent,
     AdminComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    
 
   
 
@@ -82,6 +86,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
+    NgChartsModule
+    
   
     
     

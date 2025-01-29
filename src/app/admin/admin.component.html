@@ -1,21 +1,126 @@
 <div class="admin-dashboard">
 
-    <h2>Registered Users:</h2>
-    <table class="user-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Full Name</th>
-          <th>Email</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.id }}</td>
-          <td>{{ user.fullName }}</td>
-          <td>{{ user.email }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="stats-button-container">
+    <button class="stats-button" (click)="showStatistics()">
+      <i class="fas fa-chart-bar"></i> View Statistics
+    </button>
+  </div>
+
+  <!-- Add this section for statistics -->
+  <section *ngIf="showStats" class="dashboard-section stats-section">
+    <h2>Course Enrollment Statistics</h2>
+    <div class="charts-container">
+      <div class="chart-wrapper">
+        <h3>Course Enrollments</h3>
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [type]="'bar'">
+        </canvas>
+      </div>
+      
+      <div class="chart-wrapper">
+        <h3>Enrollment Distribution</h3>
+        <canvas baseChart
+          [datasets]="pieChartData"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [type]="'pie'">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Detailed Statistics Table -->
+    <div class="stats-table-container">
+      <h3>Detailed Course Statistics</h3>
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Course Title</th>
+            <th>Total Enrollments</th>
+            <th>Percentage</th>
+            <th>Instructor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stat of courseStats">
+            <td>{{ stat.title }}</td>
+            <td>{{ stat.enrollments }}</td>
+            <td>{{ stat.percentage }}%</td>
+            <td>{{ stat.instructor }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+    <!-- Registered Users Section -->
+    <section class="dashboard-section">
+      <h2>Registered Users</h2>
+      <div class="table-container">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Actions</th> <!-- New column for delete action -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.fullName }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <button class="delete-btn" (click)="deleteUser(user.id)" 
+                        [disabled]="user.email === 'admin@example.com'">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  
+    <!-- Contact Form Submissions Section -->
+    <section class="dashboard-section">
+      <h2>Contact Form Submissions</h2>
+      <div class="table-container">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of contactSubmissions">
+              <td>{{ contact.id }}</td>
+              <td>{{ contact.name }}</td>
+              <td>{{ contact.email }}</td>
+              <td>
+                <div class="message-cell" [class.expanded]="contact.expanded">
+                  {{ contact.message }}
+                </div>
+                <button *ngIf="contact.message.length > 50 && !contact.expanded" 
+                        (click)="contact.expanded = true" 
+                        class="view-more-btn">
+                  View More
+                </button>
+              </td>
+              <td>
+                <button class="delete-btn" (click)="deleteContact(contact.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
