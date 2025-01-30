@@ -1,0 +1,46 @@
+<div class="legal-content">
+    <h1>Cookie Settings</h1>
+    <p class="last-updated">Last Updated: January 30, 2025</p>
+
+    <section>
+        <h2>Cookie Preferences</h2>
+        <div class="cookie-options">
+            <div class="cookie-option">
+                <label class="switch">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider"></span>
+                </label>
+                <div class="cookie-text">
+                    <h3>Essential Cookies</h3>
+                    <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+                </div>
+            </div>
+
+
+            <div class="cookie-option">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="preferences.analytics">
+                    <span class="slider"></span>
+                </label>
+                <div class="cookie-text">
+                    <h3>Analytics Cookies</h3>
+                    <p>These cookies allow us to analyze site usage to evaluate and improve its performance.</p>
+                </div>
+            </div>
+
+            <div class="cookie-option">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="preferences.marketing">
+                    <span class="slider"></span>
+                </label>
+                <div class="cookie-text">
+                    <h3>Marketing Cookies</h3>
+                    <p>These cookies are used to personalize and optimize your experience.</p>
+                </div>
+            </div>
+
+
+        </div>
+        <button class="save-preferences" (click)="savePreferences()">Save Preferences</button>
+    </section>
+</div>

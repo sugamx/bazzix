@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/admin']);
             } else {
               this.showSuccessSnackbar('Login successful');
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/']);
             }
           } else {
             this.errorMessage = response.message || 'Invalid email or password';

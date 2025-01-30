@@ -38,6 +38,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { CookieSettingsComponent } from './cookie-settings/cookie-settings.component';
 
 
 @NgModule({
@@ -67,6 +70,9 @@ import { NgChartsModule } from 'ng2-charts';
     AdminComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    PrivacyPolicyComponent,
+    TermsOfServiceComponent,
+    CookieSettingsComponent,
     
 
   

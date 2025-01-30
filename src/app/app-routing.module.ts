@@ -16,6 +16,9 @@ import { CreateCourseComponent } from './instructor/create-course/create-course.
 import { AdminComponent } from './admin/admin.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CookieSettingsComponent } from './cookie-settings/cookie-settings.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 // import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -30,6 +33,9 @@ const routes: Routes = [
   { path:'dashboard',component:DashboardComponent,canActivate: [AuthGuard]},
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'terms-of-service', component: TermsOfServiceComponent },
+  { path: 'cookie-settings', component: CookieSettingsComponent },
   {
     path: 'instructor',
     canActivate: [AuthGuard], // Protect instructor routes with AuthGuard

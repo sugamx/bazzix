@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, of, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
+import { CookieService } from './cookie.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +18,7 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // Tracks authentication state
   private currentUserSubject = new BehaviorSubject<any>(this.getCurrentUser()); // Tracks the current user data
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {}
 
   // Observable to expose authentication state
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
@@ -104,6 +105,9 @@ export class AuthService {
  
   // Logout method
   logout(): void {
+    
+    // Clear cookie preferences
+    this.cookieService.clearPreferences();
     localStorage.removeItem('user');
     this.isAuthenticatedSubject.next(false); // Notify subscribers about authentication state
     this.currentUserSubject.next(null); // Clear current user data
