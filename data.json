@@ -13,7 +13,9 @@
       "chosenCourses": [
         "a811",
         "6"
-      ]
+      ],
+      "resetToken": null,
+      "resetTokenExpiry": null
     },
     {
       "id": "3999",
