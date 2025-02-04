@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { CookieSettingsComponent } from './cookie-settings/cookie-settings.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { AILearnComponent } from './ailearn/ailearn.component';
 // import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'terms-of-service', component: TermsOfServiceComponent },
   { path: 'cookie-settings', component: CookieSettingsComponent },
+  { path: 'ai-learn', component: AILearnComponent },
   {
     path: 'instructor',
     canActivate: [AuthGuard], // Protect instructor routes with AuthGuard

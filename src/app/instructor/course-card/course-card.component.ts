@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 
 export class CourseCardComponent {
   @Input() course!: Course;
-  @Output() statusChange = new EventEmitter<{ courseId: number, status: 'DRAFT' | 'PUBLISHED' }>();
-  @Output() delete = new EventEmitter<number>();
+  @Output() statusChange = new EventEmitter<{ courseId: string, status: 'DRAFT' | 'PUBLISHED' }>();
+  @Output() delete = new EventEmitter<string>();
 
   constructor(public router: Router) {}
 

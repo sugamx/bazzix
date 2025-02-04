@@ -41,6 +41,14 @@ import { NgChartsModule } from 'ng2-charts';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { CookieSettingsComponent } from './cookie-settings/cookie-settings.component';
+import { AILearnComponent } from './ailearn/ailearn.component';
+import { FormatTextPipe } from "../format-text.pipe";
+import { TruncatePipe } from "../truncate.pipe";
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './store/reducers/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/effects/effects';
+
 
 
 @NgModule({
@@ -73,10 +81,7 @@ import { CookieSettingsComponent } from './cookie-settings/cookie-settings.compo
     PrivacyPolicyComponent,
     TermsOfServiceComponent,
     CookieSettingsComponent,
-    
-
-  
-
+    AILearnComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,15 +97,13 @@ import { CookieSettingsComponent } from './cookie-settings/cookie-settings.compo
     MatIconModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    NgChartsModule
-    
-  
-    
-    
-  ],
-  providers: [
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
+    NgChartsModule,
+    StoreModule.forRoot({ user: userReducer }),
+    EffectsModule.forRoot([UserEffects]),
+    FormatTextPipe,
+    TruncatePipe,
+],
+
+bootstrap: [AppComponent] 
 })
 export class AppModule { }

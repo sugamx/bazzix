@@ -1,0 +1,64 @@
+<div class="ai-learn-container">
+    <!-- Centered Compact Chat Interface -->
+    <div class="chat-interface compact">
+        <div class="welcome-message">
+            <h2>AI Course Assistant</h2>
+            <p>Ask me about courses! 🚀</p>
+        </div>
+        
+        <div class="messages-container">
+            <div *ngFor="let message of messages" class="message" [class.ai-message]="message.isAI">
+                <div class="message-content" [innerHTML]="message.content | formatText"></div>
+            </div>
+            <div *ngIf="isLoading" class="loading-indicator">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <textarea [(ngModel)]="userInput" placeholder="Ask about courses..." 
+                    (keyup.enter)="submitQuery()" rows="1"></textarea>
+            <button class="send-button" (click)="submitQuery()">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Horizontal Course Grid -->
+    <div *ngIf="recommendedCourses.length > 0" class="recommendations-section">
+        <h3 class="recommendation-title">Recommended Courses</h3>
+        <div class="horizontal-course-grid">
+            <div *ngFor="let course of recommendedCourses.slice(0,3)" class="course-card" [routerLink]="['/course', course.id]">
+                <div class="card-header">
+                    <img [src]="course.image" alt="Course thumbnail" class="course-thumbnail">
+                    <div class="course-badge" *ngIf="course.promotion_badge">
+                        {{ course.promotion_badge }}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="course-title">{{ course.title }}</h5>
+                    <div class="course-meta">
+                        <span class="instructor">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            {{ course.instructor }}
+                        </span>
+                        <span class="rating">
+                            <i class="fas fa-star"></i>
+                            {{ course.rating || 0 }} ({{ course.total_reviews || 0 }} reviews)
+                        </span>
+                    </div>
+                    <p class="course-description">{{ course.description | truncate:120 }}</p>
+                    <div class="course-details">
+                        <span class="level"><i class="fas fa-signal"></i> {{ course.level || 'All Levels' }}</span>
+                       
+                        <span class="duration"><i class="far fa-clock"></i> {{ course.duration_hours || 0 }}h</span>
+                    </div>
+                    <div class="price-section">
+                        <span class="current-price">{{ course.price | currency }}</span>
+                        <span *ngIf="course.discount" class="original-price">{{ course.original_price | currency }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

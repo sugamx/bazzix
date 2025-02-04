@@ -59,7 +59,7 @@
 
         <!-- Empty State -->
         <div class="empty-state" *ngIf="!isLoading && filteredCourses.length === 0">
-            <img src="/assets/empty-courses.svg" alt="No courses" class="empty-illustration">
+            <img src="./dog.png" alt="No courses" class="empty-illustration">
             <h3>No courses found</h3>
             <p *ngIf="searchQuery">No results for "{{ searchQuery }}"</p>
             <p *ngIf="!searchQuery">Start by creating a new course</p>

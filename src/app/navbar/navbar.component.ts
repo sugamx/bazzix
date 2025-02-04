@@ -1,6 +1,9 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectUserName } from '../store/selectors/user.selectors';
 
 @Component({
   selector: 'app-navbar',
@@ -12,39 +15,70 @@ import { NavigationEnd, Router } from '@angular/router';
 
 
 export class NavbarComponent implements OnInit {
-  isAuthenticated: boolean = false; // Tracks user login state
-  dropdownVisible: boolean = false; // Tracks dropdown visibility
+  isAuthenticated: boolean = false;
+  dropdownVisible: boolean = false;
   currentUser: any = null;
   currentRoute: string = '';
+  mobileMenuActive: boolean = false;
+  userName$: Observable<string>;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private store: Store
   ) {
-    // Subscribe to route changes
+    this.userName$ = this.store.select(selectUserName);
+    this.setupRouteListener();
+  }
+
+  private setupRouteListener(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.urlAfterRedirects;
+        this.closeMobileMenu();
       }
     });
   }
 
   ngOnInit(): void {
-    // Subscribe to authentication state
-    this.authService.isAuthenticated$.subscribe((authState) => {
+    this.setupAuthSubscriptions();
+  }
+
+  private setupAuthSubscriptions(): void {
+    this.authService.isAuthenticated$.subscribe(authState => {
       this.isAuthenticated = authState;
     });
 
-    // Subscribe to current user data
-    this.authService.currentUser$.subscribe((user) => {
+    this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
   }
 
   isAdmin(): boolean {
-    const currentUser = this.currentUser;
-    return currentUser?.email === 'admin@example.com' || currentUser?.role === 'admin';
+    return this.currentUser?.email === 'admin@example.com' || 
+           this.currentUser?.role === 'admin';
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuActive = !this.mobileMenuActive;
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = this.mobileMenuActive ? 'hidden' : 'auto';
+    
+    // Close dropdown if open
+    if (this.mobileMenuActive) {
+      this.dropdownVisible = false;
+    }
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuActive = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  // Call this method when a nav link is clicked
+  onNavLinkClick(): void {
+    this.closeMobileMenu();
   }
 
   isInstructorRoute(): boolean {
@@ -55,20 +89,38 @@ export class NavbarComponent implements OnInit {
     return this.currentRoute.startsWith('/admin');
   }
 
-  toggleDropdown(event: Event) {
+  toggleDropdown(event: Event): void {
     event.stopPropagation();
     this.dropdownVisible = !this.dropdownVisible;
   }
 
   @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
+  onClickOutside(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    
+    // Check if click is outside both the dropdown and user icon
+    if (!this.elementRef.nativeElement.contains(target)) {
       this.dropdownVisible = false;
     }
+
+    // Close mobile menu when clicking outside
+    if (!target.closest('.menu-toggle') && 
+        !target.closest('.nav-links') && 
+        this.mobileMenuActive) {
+      this.closeMobileMenu();
+    }
+  }
+
+  // Add escape key handler to close menus
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapePress(event: KeyboardEvent): void {
+    this.dropdownVisible = false;
+    this.closeMobileMenu();
   }
 
   logout(): void {
     this.authService.logout();
-    this.dropdownVisible = false; // Hide the dropdown
+    this.dropdownVisible = false;
+    this.closeMobileMenu();
   }
 }

@@ -49,7 +49,7 @@ export class CourseListComponent implements OnInit {
       );
   }
 
-  confirmDelete(courseId: number) {
+  confirmDelete(courseId: string) {
     if (confirm('Are you sure you want to delete this course?')) {
       this.courseService.deleteCourse(courseId).subscribe({
         next: () => {

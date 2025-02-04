@@ -44,6 +44,8 @@
           formControlName="price"
           class="form-control"
           placeholder="Enter course price"
+          (input)="formatNumber($event)"
+          [value]=""  
         />
         <div *ngIf="courseForm.get('price')?.invalid && courseForm.get('price')?.touched" class="error">
           Price must be a positive number.

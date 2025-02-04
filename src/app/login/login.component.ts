@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router for navigation
 import { AuthService } from '../auth.service'; // Import AuthService
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
 
+import * as UserActions from '../store/actions/user_actions'; 
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store // Inject the NgRx store
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -57,9 +60,16 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           if (response.success) {
             // Already saved to localStorage in service
+
+
             this.errorMessage = null;
             this.showSuccessSnackbar('Login successful');
             const currentUser = this.authService.getCurrentUser();
+
+            if (currentUser && currentUser.id) {
+              this.store.dispatch(UserActions.loadUser({ userId: currentUser.id }));
+            }
+  
             if (currentUser.role === 'admin') {
               this.router.navigate(['/admin']);
             } else {

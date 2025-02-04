@@ -79,7 +79,7 @@ export class CreateCourseComponent implements OnInit {
   loadCourseForEdit(courseId: string): void {
     this.courseService.getCourseById(courseId).subscribe({
       next: (course) => {
-        this.currentCourseId = course.id;
+        this.currentCourseId = parseInt(course.id);
         this.courseForm.patchValue({
           title: course.title,
           description: course.description,
@@ -137,7 +137,7 @@ export class CreateCourseComponent implements OnInit {
     console.log("Submitting Course Data:", courseData); // Debugging
   
     if (this.isEditMode && this.currentCourseId) {
-      this.courseService.updateCourse(this.currentCourseId, courseData).subscribe({
+      this.courseService.updateCourse(this.currentCourseId.toString(), courseData).subscribe({
         next: () => {
           console.log('Course updated successfully');
           this.router.navigate(['/instructor/courses']);
@@ -156,6 +156,17 @@ export class CreateCourseComponent implements OnInit {
           console.error('Failed to create course', err);
         }
       });
+    }
+  }
+
+   // Add this method
+   formatNumber(event: any) {
+    const input = event.target as HTMLInputElement;
+    // Convert to number to remove leading zeros
+    const value = Number(input.value);
+    // Update the input value if it's a valid number
+    if (!isNaN(value)) {
+      input.value = value.toString();
     }
   }
   

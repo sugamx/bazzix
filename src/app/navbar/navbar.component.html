@@ -9,7 +9,9 @@
       <li *ngIf="!isInstructorRoute()"><a routerLink="/coursesMain">Courses</a></li>
       <li *ngIf="!isInstructorRoute()"><a routerLink="/contact">Contact</a></li>
       <li *ngIf="!isInstructorRoute()"><a routerLink="/instructor/courses">Instructor</a></li>
+      <li><a routerLink="/ai-learn">AI Learn</a></li>
       <li *ngIf="isInstructorRoute()"><a routerLink="/home">Student</a></li>
+      
 
       <!-- Login and Signup Buttons -->
       <li *ngIf="!isAuthenticated"><a routerLink="/login">Login</a></li>
@@ -23,8 +25,12 @@
   <!-- User Icon -->
   <div class="user-icon-container" *ngIf="isAuthenticated" (click)="toggleDropdown($event)">
     <img src="./user1.jpg" alt="User Icon" class="user-icon" />
+        <!-- Display the user's name using the async pipe -->
+
     <div [class.show]="dropdownVisible" class="dropdown mt-3">
       <!-- Show dashboard only for non-admin users -->
+      <span *ngIf="!isAdminRoute()" class="user-name"> {{ userName$ | async }}</span>
+
       <a *ngIf="!isAdmin()" routerLink="/dashboard">Dashboard</a>
       <a (click)="logout()">Logout</a>
     </div>
