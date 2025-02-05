@@ -108,16 +108,17 @@ export class CourseService {
   }
 
   updateCourse(courseId: string, updates: any): Observable<Course> {
-    // Ensure we're working with fresh data
     return this.http.patch<Course>(`${this.apiUrl}/${courseId}`, updates).pipe(
       tap((updatedCourse) => {
         const currentCourses = this.coursesSubject.value;
-        const updatedCourses = currentCourses.map(course => 
-          course.id === courseId ? this.setDefaultCourseValues({
-            ...course,
-            ...updatedCourse,
-            updated_at: new Date().toISOString()  // Force update timestamp
-          }) : course
+        const updatedCourses = currentCourses.map(course =>
+          course.id.toString() === courseId
+            ? this.setDefaultCourseValues({
+                ...course,
+                ...updatedCourse,
+                updated_at: new Date().toISOString(), // Force update timestamp
+              })
+            : course
         );
         this.coursesSubject.next(updatedCourses);
       }),
@@ -127,6 +128,7 @@ export class CourseService {
       })
     );
   }
+  
   
     deleteCourse(courseId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${courseId}`).pipe(

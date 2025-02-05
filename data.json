@@ -11,7 +11,10 @@
       "password": "1qaz2wsx",
       "terms": true,
       "chosenCourses": [
-        "a811"
+        "2",
+        "1",
+        "8943",
+        "6"
       ],
       "resetToken": null,
       "resetTokenExpiry": null
@@ -23,7 +26,9 @@
       "password": "1qaz2wsx",
       "terms": true,
       "chosenCourses": [
-        "6"
+        "6",
+        "8943",
+        "5"
       ]
     },
     {
@@ -31,7 +36,12 @@
       "fullName": "jack",
       "email": "jack@gmail.com",
       "password": "1qaz2wsx",
-      "terms": true
+      "terms": true,
+      "chosenCourses": [
+        "8943",
+        "a811",
+        "5"
+      ]
     }
   ],
   "contact": [
@@ -49,46 +59,6 @@
     }
   ],
   "courses": [
-    {
-      "id": "1",
-      "title": "Angular for Beginners",
-      "description": "Learn Angular from scratch and build real-world applications.",
-      "instructor": "John Doe",
-      "price": 49.99,
-      "image": "./c3.jpg",
-      "rating": 4.7,
-      "total_reviews": 2354,
-      "total_enrolled": 15000,
-      "duration_hours": 12.5,
-      "level": "Beginner",
-      "category": "Development",
-      "language": "English",
-      "subtitles": [
-        "English",
-        "Spanish"
-      ],
-      "lectures": 85,
-      "resources": [
-        "Articles",
-        "Downloadable Resources"
-      ],
-      "prerequisites": [
-        "Basic HTML/CSS",
-        "JavaScript fundamentals"
-      ],
-      "objectives": [
-        "Build complete Angular applications",
-        "Understand Angular architecture",
-        "Implement reactive forms"
-      ],
-      "what_you_get": [
-        "Certificate of Completion",
-        "Full lifetime access",
-        "Access on mobile"
-      ],
-      "last_updated": "2024-03-15",
-      "promotion_badge": "Bestseller"
-    },
     {
       "id": "2",
       "title": "Advanced JavaScript",
@@ -129,7 +99,7 @@
     },
     {
       "id": "3",
-      "title": "Networking4",
+      "title": "Networking78",
       "description": " Networking is the process of connecting devices  to communicate and share resources. ",
       "instructor": "sugam",
       "price": 47,
@@ -150,8 +120,12 @@
         "Design Assets",
         "Project Files"
       ],
-      "prerequisites": [],
-      "objectives": [],
+      "prerequisites": [
+        "naa"
+      ],
+      "objectives": [
+        "naaa"
+      ],
       "what_you_get": [
         "Portfolio Projects",
         "1-on-1 Mentoring Sessions"

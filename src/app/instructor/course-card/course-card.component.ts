@@ -20,7 +20,7 @@ export class CourseCardComponent {
   constructor(public router: Router) {}
 
   editCourse() {
-    // this.router.navigate(['/instructor/courses/edit', this.course.id]);
+     this.router.navigate(['/instructor/courses/edit', this.course.id]);
     alert('Edit course clicked');
     // this.router.navigate(['/about'])
   }

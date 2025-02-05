@@ -61,6 +61,12 @@
           (change)="onFileSelected($event)"
           accept="image/*"
         />
+
+          <!-- Display error message if image control is invalid -->
+      <div *ngIf="courseForm.get('image')?.invalid && courseForm.get('image')?.touched" class="error">
+        Image is required.
+      </div>
+      
         <div *ngIf="courseForm.get('image')?.value">
           <img [src]="courseForm.get('image')?.value" alt="Course Image" width="200" />
         </div>

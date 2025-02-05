@@ -14,34 +14,32 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  
+
 
   updateUser(user: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${user.id}`, user);
   }
 
-  addCourseToUser(userId: string, courseId: number): Observable<any> {
+  // user.service.ts
+  addCourseToUser(userId: string, courseId: string): Observable<any> {
     return this.getUserById(userId).pipe(
       switchMap((user) => {
-        // Ensure chosenCourses is initialized as an array if it doesn't exist
         if (!user.chosenCourses) {
           user.chosenCourses = [];
         }
-  
-        // Add the course only if it's not already present
-        if (!user.chosenCourses.includes(courseId)) {
-          user.chosenCourses.push(courseId);
+        // Convert courseId to string to ensure consistency
+        const courseIdStr = courseId.toString();
+        if (!user.chosenCourses.includes(courseIdStr)) {
+          user.chosenCourses.push(courseIdStr);
           return this.updateUser(user);
         }
-        
-        // Return the user as-is if the course is already added
         return of(user);
       })
     );
   }
-  
+
   updateUserCourses(userId: string, updatedCourses: string[]): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${userId}`, { chosenCourses: updatedCourses });
   }
-  
+
 }

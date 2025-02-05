@@ -7,7 +7,7 @@ import { ChartConfiguration, ChartData } from 'chart.js';
 @Component({
   selector: 'app-admin',
   standalone: false,
-  
+
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private courseService: CourseService,
-   
+
   ) { }
 
   ngOnInit(): void {
@@ -89,8 +89,10 @@ export class AdminComponent implements OnInit {
 
   calculateEnrollmentStats(courses: any[], users: any[]) {
     const stats = courses.map(course => {
-      const enrollments = users.filter(user => 
-        user.chosenCourses && user.chosenCourses.includes(course.id)
+      const enrollments = users.filter(user =>
+        user.chosenCourses && user.chosenCourses.some((c: string) =>
+          String(c) === String(course.id) // Compare as strings
+        )
       ).length;
 
       return {
@@ -105,7 +107,7 @@ export class AdminComponent implements OnInit {
     // Calculate percentages
     const totalEnrollments = stats.reduce((sum, course) => sum + course.enrollments, 0);
     stats.forEach(course => {
-      course.percentage = totalEnrollments > 0 
+      course.percentage = totalEnrollments > 0
         ? parseFloat(((course.enrollments / totalEnrollments) * 100).toFixed(1))
         : 0;
     });
@@ -113,30 +115,61 @@ export class AdminComponent implements OnInit {
     return stats;
   }
 
+  // Compute a 32-bit unsigned integer hash using a djb2 variant.
+  private hashString(str: string): number {
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    }
+    // Ensure non-negative 32-bit integer.
+    return hash >>> 0;
+  }
+
+  // Mulberry32 PRNG: returns a function that produces a pseudo-random number between 0 and 1.
+  private mulberry32(seed: number): () => number {
+    return function () {
+      let t = seed += 0x6D2B79F5;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+  }
+
+  // Generate a course color using a seedable PRNG.
+  // This ensures that even similar ids produce a varied color by deriving hue, saturation, and lightness independently.
+  private getCourseColor(id: string): string {
+    const seed = this.hashString(id);
+    const rand = this.mulberry32(seed);
+
+    // Hue between 0 and 359
+    const hue = Math.floor(rand() * 360);
+    // Saturation between 60% and 100%
+    const saturation = Math.floor(rand() * 41) + 60;
+    // Lightness between 40% and 70%
+    const lightness = Math.floor(rand() * 31) + 40;
+
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  }
+
+
   updateChartData(stats: any[]) {
     // Update Bar Chart
     this.barChartLabels = stats.map(stat => stat.title);
     this.barChartData = [{
       data: stats.map(stat => stat.enrollments),
       label: 'Enrollments',
-      backgroundColor: this.generateColors(stats.length)
+      backgroundColor: stats.map(stat => this.getCourseColor(stat.id)) // Dynamic color per course
     }];
 
     // Update Pie Chart
     this.pieChartLabels = stats.map(stat => stat.title);
     this.pieChartData = [{
       data: stats.map(stat => stat.enrollments),
-      backgroundColor: this.generateColors(stats.length)
+      backgroundColor: stats.map(stat => this.getCourseColor(stat.id)) // Dynamic color per course
     }];
   }
 
-  generateColors(count: number): string[] {
-    const colors = [
-      '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-      '#FF9F40', '#FF6384', '#C9CBCF', '#4BC0C0', '#FF9F40'
-    ];
-    return Array(count).fill(0).map((_, i) => colors[i % colors.length]);
-  }
+
 
   loadUsers(): void {
     this.authService.getAllUsers().subscribe(users => {

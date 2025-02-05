@@ -216,3 +216,28 @@
     opacity: 1;
   }
 }
+
+
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+  .sign-up-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .testimonials, .sign-up-card {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 0 10px;
+  }
+  
+  /* Adjust button size for easier tapping */
+  .sign-up-button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}

@@ -214,3 +214,27 @@
     opacity: 1;
   }
 }
+
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .testimonials, .login-card {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 0 10px;
+  }
+  
+  /* Optionally, adjust typography or button sizes for easier mobile tap targets */
+  .login-button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}

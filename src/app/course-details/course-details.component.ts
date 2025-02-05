@@ -59,7 +59,7 @@ export class CourseDetailsComponent implements OnInit {
       return;
     }
   
-    this.userService.addCourseToUser(user.id, parseInt(this.course.id)).subscribe({
+    this.userService.addCourseToUser(user.id, this.course.id.toString()).subscribe({
       next: (updatedUser) => {
         this.enrolled = true;
         this.message = 'Successfully enrolled in this course!';
