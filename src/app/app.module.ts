@@ -48,6 +48,7 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/effects';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -82,6 +83,7 @@ import { UserEffects } from './store/effects/effects';
     TermsOfServiceComponent,
     CookieSettingsComponent,
     AILearnComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
