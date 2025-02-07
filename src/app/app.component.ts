@@ -18,6 +18,7 @@ import { loadUser } from './store/actions/user_actions';
 export class AppComponent implements OnInit {
 
   protected title = 'app';
+
   constructor(
     private authService: AuthService,
     private store: Store
